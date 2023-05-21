@@ -1,24 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import './index.css';
+import { useState,useEffect } from 'react';
+import DB from "./db.json";
+import Quotes from './quotes';
 
 function App() {
+  const[change,setChange]=useState(false);
+  const[index,setIndex]=useState(0);
+  const[colors,setColors]=useState("white");
+  useEffect(
+    ()=>{
+      setColors(Math.floor(Math.random()*16777215).toString(16));
+      document.getElementById("body").style.backgroundColor = '#' + colors;
+      setIndex(Math.round(Math.random()*(DB.length-1)));
+
+    },[change]
+  )
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  
+    <div id='quote-box' className='container m-auto h-50 p-0'>
+      <Quotes quote={DB[index]}/>
+      <button id='new-quote' onClick={()=>{
+        setChange(!change);
+      }}>New Quote</button>
+      <a id='tweet-quote' class='m-auto'  href="https://twitter.com/intent/tweet" >Tweet</a>
     </div>
+
+
   );
 }
 
