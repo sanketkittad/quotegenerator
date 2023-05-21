@@ -23,7 +23,6 @@ function App() {
       <button id='new-quote' onClick={()=>{
         setChange(!change);
       }}>New Quote</button>
-      <a id='tweet-quote' class='m-auto'  href="https://twitter.com/intent/tweet" >Tweet</a>
     </div>
 
 
